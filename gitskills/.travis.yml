@@ -1,0 +1,13 @@
+language: python
+python:
+  - "2.7"
+# command to install dependencies
+install: "pip install -U pytest selenium sauceclient requests robotframework robotframework-ride robotframework-selenium2library"
+# command to run tests
+script: 
+  - "export PYTHONPATH=$PYTHONPATH:."
+  - "python testone.py"
+addons:
+  sauce_connect:
+    username: "testwangchao"
+    access_key: "1b7cab22-028e-4940-a1bf-f1af92292ce1"
