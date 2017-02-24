@@ -9,4 +9,4 @@ install:
   - pip list
 script:
   - "export PYTHONPATH=$PYTHONPATH:."
-  - "python PythonLearnA.py"
+  - "sudo python PythonLearnA.py"
