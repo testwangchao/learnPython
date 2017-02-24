@@ -5,8 +5,8 @@ python:
   - "2.7.12"
 # command to install dependencies
 install:
-  - pip install pydes
-  - pip list
+  - sudo pip install pydes
+  - sudo pip list
 script:
   - "export PYTHONPATH=$PYTHONPATH:."
   - "sudo python PythonLearnA.py"
