@@ -2,11 +2,11 @@ language: python
 dist: trusty
 sudo: required
 python:
-  - "2.7"
+  - "2.7.12"
 # command to install dependencies
 install:
   - pip install pydes
   - pip list
 script:
   - "export PYTHONPATH=$PYTHONPATH:."
-  - "sudo python PythonLearnA.py"
+  - "python PythonLearnA.py"
