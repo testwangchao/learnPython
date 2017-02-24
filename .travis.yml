@@ -1,11 +1,10 @@
 language: python
 dist: trusty
-sudo: required
+sudo: true
 python:
   - "2.7.12"
 # command to install dependencies
 install:
-  - sudo -i
   - pip install pydes
   - pip list
 script:
