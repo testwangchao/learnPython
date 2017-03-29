@@ -1,3 +1,8 @@
-## python¸ß¼¶Óï·¨
-### Ò»¡¢python×°ÊÎÆ÷
-[×°ÊÎÆ÷µÄ»ù±¾ÓÃ·¨](https://github.com/testwangchao/learnPython/blob/master/%E8%A3%85%E9%A5%B0%E5%99%A8/Decorator.py)
+## pythoné«˜çº§è¯­æ³•
+
+### ä¸€ã€pythonè£…é¥°å™¨
+[è£…é¥°å™¨çš„åŸºæœ¬ç”¨æ³•](https://github.com/testwangchao/learnPython/blob/master/%E8%A3%85%E9%A5%B0%E5%99%A8/Decorator.py)
+
+### äºŒã€å•ä¾‹æ¨¡å¼
+1. [å•ä¾‹æ¨¡å¼](https://gist.github.com/shiinaao/41195d4e3122f4a95a02c372e4fda6af)
+2. [__new__å®ç°](https://github.com/testwangchao/learnPython/blob/master/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/SingletonMode.py)
