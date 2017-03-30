@@ -5,18 +5,22 @@ class SingletonMode(object):
     def __new__(cls, *args, **kwargs):
         if not hasattr(cls,'_instance'):
             cls._instance = super(SingletonMode,cls).__new__(cls,*args,**kwargs)
-            global driver
-            driver = SingletonMode().Getdriver()
+            #global driver
+            #driver = SingletonMode().Getdriver()
         return cls._instance
-    def Getdriver(self):
+    @staticmethod
+    def Getdriver():
         return webdriver.Chrome()
-    def add(self):
-        return driver
 
+class Add(SingletonMode):
+    #global driver
+    driver = SingletonMode.Getdriver()
+    def get(self):
+        return self.driver
 
-a = SingletonMode()
-b = SingletonMode()
+a = Add()
+b = Add()
 print a
 print b
-a.add().get("http://www.baidu.com")
-a.add().get("http://www.taobao.com")
+a.get().get("http://www.baidu.com")
+a.get().get("http://www.taobao.com")
