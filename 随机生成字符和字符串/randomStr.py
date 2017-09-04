@@ -25,6 +25,7 @@ def randomStr(length):
 def randomStr2(length):
     print "".join(random.sample(string.ascii_letters,length))
 if __name__=="__main__":
+    lambda str_len: ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(str_len))
     randomChar2()
     randomStr(5)
     randomStr2(3)

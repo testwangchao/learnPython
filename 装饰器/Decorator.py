@@ -4,22 +4,21 @@ python中装饰器的基本用法
 '''
 import logging,unittest
 from functools import wraps
-
-'''
+import logging
+logging.basicConfig(level="INFO")
 #装饰器函数
-def my_decorator(f):
-     @wraps(f)
+#　
+def my_decorator(func):
+     @wraps(func)
      def wrapper(*args, **kwds):
          logging.debug("start deco")
          print 'Calling decorated function'
-         return f()
+         func(*args)
          logging.info("strat end")
      return wrapper
-@my_decorator
-def f():
-    print 'test!'
-f()
-'''
+#@my_decorator   #等价于f = my_decorator(f)    f()
+def f(msg):
+    print msg
 
 
 class Sum():
@@ -42,9 +41,36 @@ class TestSum(unittest.TestCase):
     @deco()
     def test_sum1(self):
         self.assertEqual(Sum(2,3).add(),6)
-
+# 带参数的装饰器
+'''
+相当于：
+test_func = write_log("test_func")(test_func)
+test_func()
+'''
+def write_log(msg):
+    def decorator(func):
+        @wraps(func)
+        def inner():
+            func()
+            logging.info(msg)
+        return inner
+    return decorator
+@write_log("This is test.")
+def test_func():
+    print "test"
+# 将装饰器定义为类的一部分
+class Demo(object):
+    def __init__(self):
+        super(Demo,self).__init__()
+    def deco(self,func):
+        @wraps(func)
+        def inner(*args):
+            print "test"
+            func(*args)
+        return inner
+a = Demo()
+@a.deco
+def test_demo():
+    print "test_demo"
 if __name__ == "__main__":
-    unittest.main()
-
-
-
+    test_demo()
