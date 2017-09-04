@@ -1,7 +1,7 @@
 # coding:utf-8
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 from selenium.webdriver.chrome.webdriver import WebDriver
-from . import client
+import client
 # 驱动地址
 driver = WebDriver(executable_path="chromedriver.exe")
 
