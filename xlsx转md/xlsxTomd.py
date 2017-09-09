@@ -13,7 +13,7 @@ def OpenFile(fileName):
         #选择表
         firstTable = file.sheet_by_index(0)
         #输出的md文件位置
-        with open("C:\\Users\\wangchao88\\Desktop\\test.md",'w+') as file2:
+        with open("C:\\Users\\Administrator\\Desktop\\mergeSDK.md",'w+') as file2:
             file2.write("|编号|项目名称 |测试标题|操作步骤|预置条件|预期输出|" +
                         '\n' +
                         "|---|--------|------ |--------|--------|--------|"+
@@ -33,4 +33,4 @@ def OpenFile(fileName):
                     j += 1
                 file2.write('\n')
         file2.close()
-OpenFile("C:\\Users\\wangchao88\\Desktop\\test.xlsx")
+OpenFile("C:\\Users\\Administrator\\Desktop\\mergeSDK.xls")
