@@ -91,8 +91,6 @@ class ConnectMySql(object):
 def main():
     db = ConnectMySql("work")
     db.get_connect()
-    # for i,k in enumerate(db.get_first_row_data("select * from user")):
-    #     print i,k
     db.emptied_table("user")
 
 if __name__ == "__main__":
