@@ -16,9 +16,9 @@ class ConnectMySql(object):
     # select mysql database
     def get_connect(self):
         if self.data_base_type == "work":
-            self.connect = MySQLdb.connect(host="47.94.226.148",
+            self.connect = MySQLdb.connect(host="",
                                            port=3306, user="root",
-                                           passwd="root123", db="mydb",
+                                           passwd="", db="mydb",
                                            cursorclass=MySQLdb.cursors.DictCursor)
         self.cur = self.connect.cursor()
 
