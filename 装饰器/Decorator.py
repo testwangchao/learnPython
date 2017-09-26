@@ -16,7 +16,7 @@ def my_decorator(func):
          func(*args)
          logging.info("strat end")
      return wrapper
-#@my_decorator   #等价于f = my_decorator(f)    f()
+@my_decorator   #等价于f = my_decorator(f)    f()
 def f(msg):
     print msg
 
@@ -73,4 +73,4 @@ a = Demo()
 def test_demo():
     print "test_demo"
 if __name__ == "__main__":
-    test_demo()
+    f("test")
