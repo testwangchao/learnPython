@@ -5,7 +5,7 @@ from time import sleep
 
 # 调试元素的方法
 def demo(driver):
-    driver.get("")
+    driver.get("http://www.baidu.com")
     # driver.maximize_window()
     sleep(0.2)
 
