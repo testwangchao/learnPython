@@ -15,9 +15,11 @@ class VOW(object):
         return self  # note: return an object
 
     def __exit__(self, exc_type, exc_value, traceback):
+        print "exit"
         self.text = self.text + "!"  # add suffix
 
 
-with VOW("I'm fine") as myvow:
-    print(myvow.text)
-print myvow.text
+if __name__ == '__main__':
+    print map(lambda x:x,range(10))
+
+

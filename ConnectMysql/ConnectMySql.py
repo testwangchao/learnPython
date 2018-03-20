@@ -11,15 +11,26 @@ from _mysql_exceptions import Warning, Error, InterfaceError, DataError, \
 class ConnectMySql(object):
     def __init__(self, data_base_type):
         self.data_base_type = data_base_type
-        self.get_connect()
+        # self.get_connect()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print "close"
+        self.close()
 
     # select mysql database
     def get_connect(self):
-        if self.data_base_type == "work":
-            self.connect = MySQLdb.connect(host="",
-                                           port=3306, user="root",
-                                           passwd="", db="mydb",
-                                           cursorclass=MySQLdb.cursors.DictCursor)
+        '''
+        :param
+        :return:
+        '''
+        if self.data_base_type == 1:
+            self.connect = MySQLdb.connect(host="101.201.78.229",
+                                           port=3406, user="root",
+                                           passwd="root", db="faygo",
+                                           charset='utf8', cursorclass=MySQLdb.cursors.DictCursor)
         self.cur = self.connect.cursor()
 
     # get all data
@@ -49,9 +60,13 @@ class ConnectMySql(object):
             print e
 
     # insert to database data
-    def insert_data(self, sql,data_list):
+    def insert_data(self, sql):
+        '''
+        @param (list)
+        '''
         try:
-            self.cur.execute(sql,data_list)
+            # self.cur.execute(sql)
+            map(lambda i: self.cur.execute(i), sql)
             self.connect.commit()
         except (Warning, Error, InterfaceError, DataError,
                 DatabaseError, OperationalError, IntegrityError,
@@ -66,6 +81,7 @@ class ConnectMySql(object):
     :param sql = "insert into `user` (`name`) VALUES (%s)"
     :param data_tup = [[i] for i in range(50001)]
     '''
+
     def insert_multi_data(self, sql, data_tup):
         try:
             self.cur.executemany(sql, data_tup)
@@ -77,10 +93,11 @@ class ConnectMySql(object):
             print e
         else:
             print u"数据插入完成"
+
     # delete data
     def delete_data(self, sql):
         try:
-            self.cur.execute(sql)
+            map(lambda i: self.cur.execute(i), sql)
             self.connect.commit()
         except (Warning, Error, InterfaceError, DataError,
                 DatabaseError, OperationalError, IntegrityError,
@@ -104,7 +121,7 @@ class ConnectMySql(object):
                 ProgrammingError) as e:
             print e
         else:
-            print "%s表已清空" % table_name
+            print u"%s表已清空" % table_name
 
 
 def main():
@@ -112,7 +129,7 @@ def main():
     db.get_connect()
     sql = "insert into `user` (`name`) VALUES (%s)"
     # a = [[i] for i in range(50001)]
-    a = [[1],[2]]
+    a = [[1], [2]]
     start = time.clock()
     print start
     db.insert_data(sql, a)
@@ -126,5 +143,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-    # ConnectMySql("work").emptied_table('user')
+    with ConnectMySql(data_base_type=1) as mysql:
+        mysql.get_connect()
+        sql1 = "delete from cp where id=88"
+        sql2 = "delete from cp where id=90"
+        mysql.insert_data([sql1, sql2])
