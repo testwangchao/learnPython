@@ -35,22 +35,9 @@ def return_card(card):
         number = 'K'
     all_data.append(number)
     if type in card_type.keys():
-        # return card_type.get(type) + number
         all_data.append(card_type.get(type))
     return all_data
 
-
-def main(text):
-    data = arg_demo(text)
-    user_data = demo(data, "msg.user")
-    id = demo(user_data, "id")
-    card_list = demo(user_data, "card")
-    print id
-    # all_pai = []
-    # for card in card_list:
-    #     # print "".join(return_card(card.get("card")))
-    #     type.append(re)
-    get_type(card_list)
 
 def get_type(card):
     # 所有的牌
@@ -67,6 +54,15 @@ def get_type(card):
         print u"同花{0}".format("".join(all_pai[0::2]))
     else:
         print "".join(all_pai[0::2])
+
+
+def main(text):
+    data = arg_demo(text)
+    user_data = demo(data, "msg.user")
+    id = demo(user_data, "id")
+    card_list = demo(user_data, "card")
+    print id
+    get_type(card_list)
 
 
 if __name__ == '__main__':
