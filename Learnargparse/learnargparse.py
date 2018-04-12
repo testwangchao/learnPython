@@ -1,7 +1,7 @@
 # coding:utf-8
 import re
 from collections import Counter
-
+from userTable import user_table
 
 def demo(test_data, key_data, delimiter='.'):
     for key in key_data.split(delimiter):
@@ -25,15 +25,15 @@ def return_card(card):
     type = re.match("(\w)(\d+)", card, re.I).group(1)
     number = re.match("(\w)(\d+)", card, re.I).group(2)
     all_data = []
-    if int(number) == 1:
-        number = 'A'
-    elif int(number) == 11:
-        number = 'J'
-    elif int(number) == 12:
-        number = 'Q'
-    elif int(number) == 13:
-        number = 'K'
-    all_data.append(number)
+    # if int(number) == 1:
+    #     number = 'A'
+    # elif int(number) == 11:
+    #     number = 'J'
+    # elif int(number) == 12:
+    #     number = 'Q'
+    # elif int(number) == 13:
+    #     number = 'K'
+    all_data.append(int(number))
     if type in card_type.keys():
         all_data.append(card_type.get(type))
     return all_data
@@ -44,16 +44,33 @@ def get_type(card):
     all_pai = []
     for i in card:
         all_pai.extend(return_card(i.get("card")))
+    # print all_pai
     if len(set(all_pai[0::2])) == 1:
         print u"豹子{0}".format(list(set(all_pai[0::2]))[0])
     elif len(set(all_pai[0::2])) == 2:
-        for card_value, time in Counter(all_pai[0::2]):
+        # print all_pai[0::2]
+        for card_value, time in Counter(all_pai[0::2]).items():
             if Counter(all_pai[0::2]).get(card_value) == 2:
                 print u"对子{0}".format(card_value)
     elif len(set(all_pai[1::2])) == 1:
-        print u"同花{0}".format("".join(all_pai[0::2]))
+        sort_card_value = all_pai[0::2]
+        sort_card_value.sort(reverse=False)
+        if sort_card_value == [1, 12, 13]:
+            print u"同花顺QKA"
+        elif sort_card_value[0] + 1 == sort_card_value[1] and sort_card_value[0] + 2 == sort_card_value[2]:
+            print u"同花顺{0}".format(" ".join([str(i) for i in sort_card_value]))
+        else:
+            print u"同花{0}".format(" ".join([str(i) for i in sort_card_value]))
     else:
-        print "".join(all_pai[0::2])
+        # print "".join(all_pai[0::2])
+        sort_card_value = all_pai[0::2]
+        sort_card_value.sort(reverse=False)
+        if sort_card_value == [1, 12, 13]:
+            print u"顺子QKA"
+        elif sort_card_value[0] + 1 == sort_card_value[1] and sort_card_value[0] + 2 == sort_card_value[2]:
+            print u"顺子{0}".format(" ".join([str(i) for i in sort_card_value]))
+        else:
+            print u"高牌{0}".format(" ".join([str(i) for i in sort_card_value]))
 
 
 def main(text):
@@ -61,8 +78,12 @@ def main(text):
     user_data = demo(data, "msg.user")
     id = demo(user_data, "id")
     card_list = demo(user_data, "card")
-    print id
+    if id in user_table.keys():
+        print user_table.get(id)
+    else:
+        print id
     get_type(card_list)
+    print "\t"
 
 
 if __name__ == '__main__':
