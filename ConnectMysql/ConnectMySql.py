@@ -1,9 +1,9 @@
-# coding:utf-8
-import MySQLdb
-import MySQLdb.cursors
+import pymysql
+
+import pymysql.cursors
 import time
-from MySQLdb import MySQLError
-from _mysql_exceptions import Warning, Error, InterfaceError, DataError, \
+from pymysql import MySQLError
+from pymysql import Warning, Error, InterfaceError, DataError, \
     DatabaseError, OperationalError, IntegrityError, InternalError, \
     NotSupportedError, ProgrammingError
 
@@ -17,7 +17,6 @@ class ConnectMySql(object):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        print "close"
         self.close()
 
     # select mysql database
@@ -27,10 +26,10 @@ class ConnectMySql(object):
         :return:
         '''
         if self.data_base_type == 1:
-            self.connect = MySQLdb.connect(host="",
+            self.connect = pymysql.connect(host="101.201.78.229",
                                            port=3406, user="root",
                                            passwd="root", db="faygo",
-                                           charset='utf8', cursorclass=MySQLdb.cursors.DictCursor)
+                                           charset='utf8', cursorclass=pymysql.cursors.DictCursor)
         self.cur = self.connect.cursor()
 
     # get all data
@@ -44,7 +43,7 @@ class ConnectMySql(object):
                 DatabaseError, OperationalError, IntegrityError,
                 InternalError, MySQLError, NotSupportedError,
                 ProgrammingError) as e:
-            print e
+            print(e)
 
     # get first row data
     def get_first_row_data(self, sql):
@@ -57,7 +56,7 @@ class ConnectMySql(object):
                 DatabaseError, OperationalError, IntegrityError,
                 InternalError, MySQLError, NotSupportedError,
                 ProgrammingError) as e:
-            print e
+            print(e)
 
     # insert to database data
     def insert_data(self, sql):
@@ -72,9 +71,9 @@ class ConnectMySql(object):
                 DatabaseError, OperationalError, IntegrityError,
                 InternalError, MySQLError, NotSupportedError,
                 ProgrammingError) as e:
-            print e
+            print(e)
         else:
-            print u"数据插入完成"
+            print("数据插入完成")
 
     # insert multiple data
     '''
@@ -90,9 +89,9 @@ class ConnectMySql(object):
                 DatabaseError, OperationalError, IntegrityError,
                 InternalError, MySQLError, NotSupportedError,
                 ProgrammingError) as e:
-            print e
+            print(e)
         else:
-            print u"数据插入完成"
+            print("数据插入完成")
 
     # delete data
     def delete_data(self, sql):
@@ -103,9 +102,9 @@ class ConnectMySql(object):
                 DatabaseError, OperationalError, IntegrityError,
                 InternalError, MySQLError, NotSupportedError,
                 ProgrammingError) as e:
-            print e
+            print(e)
         else:
-            print u"数据删除成功"
+            print("数据删除成功")
 
     # close cursor
     def close(self):
@@ -119,9 +118,9 @@ class ConnectMySql(object):
                 DatabaseError, OperationalError, IntegrityError,
                 InternalError, MySQLError, NotSupportedError,
                 ProgrammingError) as e:
-            print e
+            print(e)
         else:
-            print u"%s表已清空" % table_name
+            print("%s表已清空") % table_name
 
 
 def main():
@@ -131,20 +130,17 @@ def main():
     # a = [[i] for i in range(50001)]
     a = [[1], [2]]
     start = time.clock()
-    print start
+    print(start)
     db.insert_data(sql, a)
     cur = db.cur
     conn = db.connect
     cur.close() if cur else u"使用"
     conn.close() if conn else u"使用"
     end = time.clock()
-    print end
-    print "finish use %s" % (end - start)
+    print(end)
+    print("finish use %s" % (end - start))
 
 
 if __name__ == "__main__":
     with ConnectMySql(data_base_type=1) as mysql:
         mysql.get_connect()
-        sql1 = "delete from cp where id=88"
-        sql2 = "delete from cp where id=90"
-        mysql.insert_data([sql1, sql2])
