@@ -27,7 +27,7 @@ class ConnectMySql(object):
         :return:
         '''
         if self.data_base_type == 1:
-            self.connect = MySQLdb.connect(host="101.201.78.229",
+            self.connect = MySQLdb.connect(host="",
                                            port=3406, user="root",
                                            passwd="root", db="faygo",
                                            charset='utf8', cursorclass=MySQLdb.cursors.DictCursor)
