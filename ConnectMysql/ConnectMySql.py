@@ -26,7 +26,7 @@ class ConnectMySql(object):
         :return:
         '''
         if self.data_base_type == 1:
-            self.connect = pymysql.connect(host="101.201.78.229",
+            self.connect = pymysql.connect(host="",
                                            port=3406, user="root",
                                            passwd="root", db="faygo",
                                            charset='utf8', cursorclass=pymysql.cursors.DictCursor)
